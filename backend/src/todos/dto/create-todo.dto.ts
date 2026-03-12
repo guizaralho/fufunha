@@ -1,17 +1,42 @@
-export class CreateTodoDto {
-title: string;
-description: string;
-completed: boolean;
-priority: TododPriority;
-dueAt: Date;
-completedAt: Date;
-userId: string;
-createdAt: Date;
-updatedAt: Date;
-}
+import { IsBoolean, IsDate, IsDateString, IsEnum, IsNotEmpty, IsOptional, IsString, isString } from "class-validator";
+
 
 enum TododPriority{
 LOW = 'LOW',
 MEDIUM = 'MEDIUM',
 HIGH = 'HIGH',    
+}
+
+export class CreateTodoDto{
+@IsString()
+title: string;
+
+@IsString()
+@IsOptional()
+description?: string;
+
+@IsBoolean()
+@IsNotEmpty()
+completed: boolean;
+
+@IsEnum(TododPriority)
+@IsNotEmpty()
+priority: TododPriority;
+
+@IsDateString()
+@IsOptional()
+dueAt?: Date;
+
+@IsDateString()
+completedAt: Date;
+
+@IsString()
+userId: string;
+
+@IsDateString()
+createdAt: Date;
+
+@IsDateString()
+@IsOptional()
+updatedAt: Date;
 }
