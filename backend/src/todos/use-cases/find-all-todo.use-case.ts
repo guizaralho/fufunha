@@ -17,7 +17,7 @@ export class FindAllTodoUseCase{
             return todo;
         }   catch(error){
             this.logger.error(error);
-            throw new Error('Failed to found toDo')
+            throw new Error('Failed to find all toDo')
         }
     }
 }
