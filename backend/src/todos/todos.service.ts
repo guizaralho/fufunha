@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
+import { CreateTodoRepository, DeleteTodoRepository, FindAllTodoRepository, FindUniqueTodoRepository, UpdateTodoRepository } from './repository';
 
 @Injectable()
 export class TodosService {
-  create(createTodoDto: CreateTodoDto) {
-    return 'This action adds a new todo';
+  constructor (
+          private readonly createTodoRepository: CreateTodoRepository,
+          private readonly findAllTodoRepository: FindAllTodoRepository,
+          private readonly findUniqueTodoRepository: FindUniqueTodoRepository,
+          private readonly updateTodoRepository: UpdateTodoRepository,
+          private readonly deleteTodoRepository: DeleteTodoRepository) {}
+  async create(createTodoDto: CreateTodoDto) {
+    return await this.createTodoRepository.create(createTodoDto);
   }
 
-  findAll() {
-    return `This action returns all todos`;
+  async findAll() {
+    return await this.findAllTodoRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  async findOne(id: string) {
+    return await this.findUniqueTodoRepository.findById(id);
   }
 
-  update(id: number, updateTodoDto: UpdateTodoDto) {
-    return `This action updates a #${id} todo`;
+  async update(id: string, data: UpdateTodoDto) {
+    return await this.updateTodoRepository.update(id,data);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  async remove(id: string) { 
+    return await this.deleteTodoRepository.delete(id);
   }
 }

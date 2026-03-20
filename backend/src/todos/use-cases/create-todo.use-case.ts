@@ -5,14 +5,14 @@ import { CreateTodoDto } from "../dto/create-todo.dto";
 @Injectable()
 export class CreateTodoUseCase{
     constructor(
-        private readonly creatTodoRepository: CreateTodoRepository,
+        private readonly createTodoRepository: CreateTodoRepository,
         private readonly logger: Logger,
     ) {}
 
     async create(data: CreateTodoDto) {
         try {
             this.logger.log('Creating toDo ...');
-            const todo = await this.creatTodoRepository.create(data);
+            const todo = await this.createTodoRepository.create(data);
             this.logger.log('toDo created successfully');
             return todo;
         }   catch(error){
