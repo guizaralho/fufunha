@@ -2,12 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { CreateTodoRepository, DeleteTodoRepository, FindAllTodoRepository, FindUniqueTodoRepository, UpdateTodoRepository } from './repository';
+import { FindAllTodoUseCase } from './use-cases';
 
 @Injectable()
 export class TodosService {
   constructor (
           private readonly createTodoRepository: CreateTodoRepository,
-          private readonly findAllTodoRepository: FindAllTodoRepository,
+          private readonly findAllTodoUseCase: FindAllTodoUseCase,
           private readonly findUniqueTodoRepository: FindUniqueTodoRepository,
           private readonly updateTodoRepository: UpdateTodoRepository,
           private readonly deleteTodoRepository: DeleteTodoRepository) {}
@@ -16,7 +17,7 @@ export class TodosService {
   }
 
   async findAll() {
-    return await this.findAllTodoRepository.findAll();
+    return await this.findAllTodoUseCase.findAll();
   }
 
   async findOne(id: string) {
