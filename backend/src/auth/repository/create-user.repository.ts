@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/shared/databases/prisma.database";
+
 type CreateUserParams = {
     name?: string;
     email: string;
-    passwordHash: string;
+    passawordHash: string;
 };
 
 @Injectable()
